@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script
+            type="module"
+            src="/dist/charts/bar-chart.component.js"
+        ></script>
+    </head>
+    <body>
+        <bar-chart-component id="chart"></bar-chart-component>
+
+        <bar-chart-component
+            id="chart-delayed"
+            height="12rem"
+        ></bar-chart-component>
+
+        <bar-chart-component
+            height="16rem"
+            chart='{
+            "Style": "normal",
+            "WideContainerColumns": 30,
+            "SmallContainerColumns": 14,
+            "WideContainerGap": "0.25rem",
+            "SmallContainerGap": "0.25rem",
+            "Axes": [
+              { "Label": "Checked In", "Color": "#00a072" },
+              { "Label": "Assisted", "Color": "#ef720b" },
+              { "Label": "Missed", "Color": "red" }
+            ],
+            "XAxis": ["03/21/2025", "03/22/2025", "03/23/2025", "03/24/2025", "03/25/2025"],
+            "Points": [
+              [12, 12, 12],
+              [28, 31, 20],
+              [49, 28, 13],
+              [94, 8, 15],
+              [25, 30, 25]
+            ]
+          }'
+        ></bar-chart-component>
+
+        <script>
+            document.querySelector("#chart").chart = {
+                Style: "normal",
+                WideContainerColumns: 6,
+                SmallContainerColumns: 6,
+                WideContainerGap: "0.25rem",
+                SmallContainerGap: "0.25rem",
+                Axes: [
+                    { Label: "Checked In", Color: "#00a072" },
+                    { Label: "Assisted", Color: "#ef720b" },
+                    { Label: "Missed", Color: "red" },
+                ],
+                XAxis: [
+                    "03/21/2025",
+                    "03/22/2025",
+                    "03/23/2025",
+                    "03/24/2025",
+                    "03/25/2025",
+                ],
+                Points: [
+                    [12, 12, 12],
+                    [28, 31, 20],
+                    [49, 28, 13],
+                    [94, 8, 15],
+                    [0, 1, 1],
+                ],
+            };
+
+            setTimeout(() => {
+                document.querySelector("#chart-delayed").chart = {
+                    Style: "normal",
+                    WideContainerColumns: 6,
+                    SmallContainerColumns: 6,
+                    WideContainerGap: "0.25rem",
+                    SmallContainerGap: "0.25rem",
+                    Axes: [
+                        { Label: "Checked In", Color: "#00a072" },
+                        { Label: "Assisted", Color: "#ef720b" },
+                        { Label: "Missed", Color: "red" },
+                    ],
+                    XAxis: [
+                        "03/21/2025",
+                        "03/22/2025",
+                        "03/23/2025",
+                        "03/24/2025",
+                        "03/25/2025",
+                    ],
+                    Points: [
+                        [12, 12, 12],
+                        [28, 31, 20],
+                        [49, 28, 13],
+                        [94, 8, 15],
+                        [25, 30, 25],
+                    ],
+                };
+            }, 1000);
+        </script>
+    </body>
+</html>

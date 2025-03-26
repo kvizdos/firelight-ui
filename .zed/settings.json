@@ -1,0 +1,17 @@
+{
+  "languages": {
+    "TypeScript": {
+      "language_servers": ["typescript-language-server", "!vtsls"],
+      "diagnostics": {
+        "external": [
+          {
+            "name": "eslint",
+            "command": "npx",
+            "arguments": ["eslint", "--format", "json", "{buffer_path}"],
+            "format": "eslint"
+          }
+        ]
+      }
+    }
+  }
+}

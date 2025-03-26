@@ -1,0 +1,31 @@
+{
+  "name": "firelight-ui",
+  "version": "0.1.4",
+  "type": "module",
+  "exports": {
+    "./charts/*": "./dist/charts/*.js",
+    "./animations/*": "./dist/animations/*.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf ./dist && tsc",
+    "dev": "rimraf ./dist && tsc --watch",
+    "lint": "eslint 'src/**/*.{ts,js}'",
+    "serve": "web-dev-server --open --watch --node-resolve"
+  },
+  "dependencies": {
+    "lit": "^3.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
+    "@web/dev-server": "^0.4.6",
+    "@web/dev-server-rollup": "^0.6.4",
+    "eslint": "^9.23.0",
+    "lit-analyzer": "^2.0.3",
+    "typescript": "^5.8.2"
+  }
+}
