@@ -2,8 +2,14 @@
 
 ![alt text](https://github.com/kvizdos/firelight-ui/blob/main/readme_assets/chart.png?raw=true)
 
-A beautiful Lit component library
+A beautiful Web Component (Lit) library
 
 ## Key Features
-- Charts: Only bar charts currently.
+- Accessible Charts: Only bar charts currently.
 - Animations: Tween between numbers
+
+## Download
+
+```
+npm i firelight-ui
+```
