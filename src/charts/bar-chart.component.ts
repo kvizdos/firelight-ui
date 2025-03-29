@@ -50,9 +50,9 @@ export class BarChartComponent extends LitElement {
 
   @state() viewingLegendKey: number = -1;
 
-  @state() loaded: Boolean = false;
+  @state() loaded: boolean = false;
 
-  @property({ type: String }) height: String = "8rem";
+  @property({ type: String }) height: string = "8rem";
 
   @property({ type: Object }) chart: BarChart = DEFAULT_CHART;
 

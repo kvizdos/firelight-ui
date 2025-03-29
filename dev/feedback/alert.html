@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script type="module" src="/dist/feedback/alert.component.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            * {
+                font-family: "Inter", sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="openbtn">Do an Alert</button>
+        <br />
+        <button id="openbtnCustom">Do an Alert w/ Custom Ack Message</button>
+        <br />
+        <button>A random button to test accessibility</button>
+
+        <alert-component></alert-component>
+
+        <script type="module">
+            import { Alert } from "/dist/feedback/alert.component.js";
+
+            document.getElementById("openbtn").onclick = function () {
+                Alert({
+                    title: "This is an alert",
+                    description: "You can even have a description woooot",
+                });
+            };
+
+            document.getElementById("openbtnCustom").onclick = function () {
+                Alert({
+                    title: "This is an alert",
+                    description: "With custom acknowledgeText set",
+                    acknowledgeText: "I understand",
+                });
+            };
+        </script>
+    </body>
+</html>

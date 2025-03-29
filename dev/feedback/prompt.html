@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script type="module" src="/dist/feedback/prompt.component.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            * {
+                font-family: "Inter", sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="openbtn">Do a Text Prompt</button>
+        <br />
+        <button id="openbtnNumber">Do a Number Prompt</button>
+        <br />
+        <button id="openbtnDecimal">Do a Decimal Prompt</button>
+        <br />
+        <button id="openbtnTel">Do a Tel Prompt</button>
+        <br />
+        <button id="openbtnDate">Do a Date Prompt</button>
+        <br />
+        <button id="openbtnTextArea">Do a Text Area Prompt</button>
+        <br />
+        <button>A random button to test accessibility</button>
+
+        <prompt-component id="prompt"></prompt-component>
+
+        <script type="module">
+            import { Prompt } from "/dist/feedback/prompt.component.js";
+
+            document.getElementById("openbtn").onclick = async function () {
+                const resp = await Prompt({
+                    title: "Enter some text!",
+                    description: "This is a Text prompt",
+                    type: "text",
+                });
+
+                if (resp.canceled) {
+                    alert("You canceled.");
+                    return;
+                }
+
+                alert("You typed: " + resp.value);
+            };
+
+            document.getElementById("openbtnNumber").onclick =
+                async function () {
+                    const resp = await Prompt({
+                        title: "Enter a number!",
+                        description: "This is a Number prompt",
+                        type: "number",
+                    });
+
+                    if (resp.canceled) {
+                        alert("You canceled.");
+                        return;
+                    }
+
+                    alert("You typed: " + resp.value);
+                };
+
+            document.getElementById("openbtnDecimal").onclick =
+                async function () {
+                    const resp = await Prompt({
+                        title: "Enter a decimal!",
+                        description: "This is a Decimal prompt",
+                        type: "decimal",
+                    });
+
+                    if (resp.canceled) {
+                        alert("You canceled.");
+                        return;
+                    }
+
+                    alert("You typed: " + resp.value);
+                };
+
+            document.getElementById("openbtnDate").onclick = async function () {
+                const resp = await Prompt({
+                    title: "Enter a Date!",
+                    description: "This is a Date prompt",
+                    type: "date",
+                });
+
+                if (resp.canceled) {
+                    alert("You canceled.");
+                    return;
+                }
+
+                alert("You typed: " + resp.value);
+            };
+
+            document.getElementById("openbtnTel").onclick = async function () {
+                const resp = await Prompt({
+                    title: "Enter a Phone Number!",
+                    description: "This is a Tel prompt",
+                    type: "tel",
+                    pattern: "\\d{3}-\\d{3}-\\d{4}",
+                    patternError: "Please type a valid phone number.",
+                });
+
+                if (resp.canceled) {
+                    alert("You canceled.");
+                    return;
+                }
+
+                alert("You typed: " + resp.value);
+            };
+
+            document.getElementById("openbtnTextArea").onclick =
+                async function () {
+                    const resp = await Prompt({
+                        title: "Enter a Text!",
+                        description: "This is a Text Area prompt",
+                        type: "textarea",
+                    });
+
+                    if (resp.canceled) {
+                        alert("You canceled.");
+                        return;
+                    }
+
+                    alert("You typed: " + resp.value);
+                };
+        </script>
+    </body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script type="module" src="/dist/buttons/button.component.js"></script>
+
+        <style>
+            #customStyles {
+                --primary-50: #f2f8fd;
+                --primary-100: #e4eefa;
+                --primary-200: #c3ddf4;
+                --primary-300: #8dc1ec;
+                --primary-400: #51a1df;
+                --primary-500: #2a85cd;
+                --primary-600: #1e73be;
+                --primary-700: #17548d;
+                --primary-800: #174875;
+                --primary-900: #193e61;
+                --primary-950: #102741;
+                --danger-50: #fff1f2;
+                --danger-100: #ffe4e6;
+                --danger-200: #fecdd3;
+                --danger-300: #fda4af;
+                --danger-400: #fb7185;
+                --danger-500: #f3405d;
+                --danger-600: #e01e47;
+                --danger-700: #b8123a;
+                --danger-800: #9f1239;
+                --danger-900: #881337;
+                --danger-950: #4c0519;
+            }
+        </style>
+    </head>
+    <body>
+        <button-component id="btn">Click Me</button-component>
+        <button-component id="btn" disabled="true"
+            >I'm Disabled</button-component
+        >
+        <button-component id="btn" class="pill">I'm a Pill</button-component>
+        <button-component id="btn" class="pill" disabled="true"
+            >I'm a disabled Pill</button-component
+        >
+        <button-component id="btn" class="plain"
+            >I'm a Plain Button</button-component
+        >
+        <button-component id="btn" class="plain" disabled="true"
+            >I'm a Disabled Plain Button</button-component
+        >
+        <button-component
+            id="asyncbtn"
+            loadingText="Loading..."
+            expectLoad="true"
+            >I have a Loading state</button-component
+        >
+        <button-component class="big">I am Big</button-component>
+
+        <div id="customStyles" style="margin-top: 1rem">
+            <button-component id="btn">Click Me</button-component>
+            <button-component id="btn" disabled="true"
+                >I'm Disabled</button-component
+            >
+            <button-component id="btn" class="pill"
+                >I'm a Pill</button-component
+            >
+            <button-component id="btn" class="pill" disabled="true"
+                >I'm a disabled Pill</button-component
+            >
+            <button-component id="btn" class="plain"
+                >I'm a Plain Button</button-component
+            >
+            <button-component id="btn" class="plain" disabled="true"
+                >I'm a Disabled Plain Button</button-component
+            >
+            <button-component
+                id="asyncbtn2"
+                loadingText="Loading..."
+                expectLoad="true"
+                >I have a Loading state</button-component
+            >
+            <button-component class="big">I am Big</button-component>
+        </div>
+
+        <script>
+            const btn = document.getElementById("btn");
+            btn.addEventListener("fl-click", () => {
+                console.log("Clicked");
+            });
+
+            const asyncBtn = document.getElementById("asyncbtn");
+            asyncBtn.addEventListener("fl-click", () => {
+                console.log("RUNNING");
+                asyncBtn.loading = true;
+                setTimeout(() => {
+                    console.log("Done");
+                    asyncBtn.loading = false;
+                }, 1000);
+            });
+
+            const asyncBtn2 = document.getElementById("asyncbtn2");
+            asyncBtn2.addEventListener("fl-click", () => {
+                console.log("RUNNING");
+                asyncBtn2.loading = true;
+                setTimeout(() => {
+                    console.log("Done");
+                    asyncBtn2.loading = false;
+                }, 1000);
+            });
+        </script>
+    </body>
+</html>

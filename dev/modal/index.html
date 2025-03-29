@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script type="module" src="/dist/modal/modal.component.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            * {
+                font-family: "Inter", sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="openbtn">Open Modal</button>
+        <button>A random button to test accessibility</button>
+
+        <modal-component id="modal" modaltitle="This is a test modal">
+            <p>Example slot info</p>
+        </modal-component>
+
+        <script>
+            const modal = document.getElementById("modal");
+            modal.addEventListener("close", () => {
+                modal.open = false;
+            });
+
+            document.getElementById("openbtn").onclick = function () {
+                modal.open = true;
+            };
+        </script>
+    </body>
+</html>
