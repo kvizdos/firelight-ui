@@ -3,16 +3,7 @@ import { customElement, property, state } from "lit/decorators.js";
 
 import "../modal/modal.component";
 import "../buttons/button.component";
-
-export function Alert(data: AlertInterface) {
-  window.dispatchEvent(new CustomEvent("fl-alert", { detail: data }));
-}
-
-export interface AlertInterface {
-  title: string;
-  description?: string;
-  acknowledgeText?: string;
-}
+import { AlertInterface } from "./feedback.functions";
 
 @customElement("alert-component")
 export class AlertComponent extends LitElement {

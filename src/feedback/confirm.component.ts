@@ -3,17 +3,7 @@ import { customElement, property, state } from "lit/decorators.js";
 
 import "../modal/modal.component";
 import "../buttons/button.component";
-
-export function Confirm(data: ConfirmInterface) {
-  window.dispatchEvent(new CustomEvent("fl-confirm", { detail: data }));
-}
-
-export interface ConfirmInterface {
-  title: string;
-  description: string;
-  proceedButton?: string;
-  cancelButton?: string;
-}
+import { ConfirmInterface } from "./feedback.functions";
 
 @customElement("confirm-component")
 export class ConfirmComponent extends LitElement {

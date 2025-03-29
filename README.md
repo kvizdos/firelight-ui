@@ -29,7 +29,7 @@ Every so often, the urge to use `alert()`, `confirm()`, or `prompt()` strikes. W
 Confirmation prompts can be triggered easily, anywhere from your code base:
 
 ```js
-import { Confirm } from "firelight-ui/feedback/confirm.component.js";
+import { Confirm } from "firelight-ui/feedback/feedback.functions.js";
 
 document.getElementById("openbtn").onclick = function () {
     Confirm({
@@ -52,7 +52,7 @@ document.getElementById("openbtnCustom").onclick = function () {
 Drop in replacement for `alert()`:
 
 ```js
-import { Alert } from "firelight-ui/feedback/alert.component.js";
+import { Alert } from "firelight-ui/feedback/feedback.functions.js";
 
 
 document.getElementById("openbtn").onclick = function () {
@@ -76,7 +76,7 @@ document.getElementById("openbtnCustom").onclick = function () {
 Drop in replacement for `prompt()`, with pattern-based validation out of the box. Check out /dev/feedback/prompt.html for more info:
 
 ```js
-import { Prompt } from "firelight-ui/feedback/prompt.component.js";
+import { Prompt } from "firelight-ui/feedback/feedback.functions.js";
 
 
 document.getElementById("openbtn").onclick = async function () {

@@ -6,49 +6,11 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 import "../modal/modal.component";
 import "../buttons/button.component";
 import { inputStyles } from "../styles/inputs.style";
-
-export type PromptType =
-  | "text"
-  | "number"
-  | "decimal"
-  | "tel"
-  | "textarea"
-  | "date";
-
-export async function Prompt(data: PromptInterface): Promise<PromptResponse> {
-  const id = crypto.randomUUID();
-  data.id = id;
-
-  return new Promise((resolve) => {
-    // Add an event listener that only runs once
-    window.addEventListener(
-      `fl-response-${data.id}`,
-      (e: Event) => {
-        const responseEvent = e as CustomEvent<PromptResponse>;
-        resolve(responseEvent.detail);
-      },
-      { once: true },
-    );
-
-    // Dispatch the prompt event
-    window.dispatchEvent(new CustomEvent("fl-prompt", { detail: data }));
-  });
-}
-
-export interface PromptInterface {
-  id: string;
-  title: string;
-  description: string;
-  type: PromptType;
-  pattern?: string;
-  patternError?: string;
-}
-
-export interface PromptResponse {
-  id: string;
-  value?: string;
-  canceled?: boolean;
-}
+import {
+  PromptInterface,
+  PromptResponse,
+  PromptType,
+} from "./feedback.functions";
 
 @customElement("prompt-component")
 export class PromptComponent extends LitElement {
