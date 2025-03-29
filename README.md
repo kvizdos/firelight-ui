@@ -22,6 +22,8 @@ npm i firelight-ui
 
 ## Feedback Prompts
 
+Every so often, the urge to use `alert()`, `confirm()`, or `prompt()` strikes. With Firelight UI, you can use the following replacements to have the same ease, without the strange UX:
+
 ![Firelight Confirmation Prompts](https://github.com/kvizdos/firelight-ui/blob/main/readme_assets/confirmations.png?raw=true)
 
 Confirmation prompts can be triggered easily, anywhere from your code base:
