@@ -1,6 +1,6 @@
 {
   "name": "firelight-ui",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "type": "module",
   "exports": {
     "./charts/*": "./dist/charts/*.js",
