@@ -4,7 +4,10 @@
   "type": "module",
   "exports": {
     "./charts/*": "./dist/charts/*.js",
-    "./animations/*": "./dist/animations/*.js"
+    "./animations/*": "./dist/animations/*.js",
+    "./modal/*": "./dist/modal/*.js",
+    "./feedback/*": "./dist/feedback/*.js",
+    "./buttons/*": "./dist/buttons/*.js"
   },
   "files": [
     "dist"
