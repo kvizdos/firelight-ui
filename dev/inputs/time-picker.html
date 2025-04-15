@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script
+            type="module"
+            src="/dist/inputs/time-picker.component.js"
+        ></script>
+    </head>
+    <body>
+        <p>Default</p>
+        <time-picker-component></time-picker-component>
+
+        <br />
+
+        <p>Forced Minutes</p>
+
+        <time-picker-component
+            defaultMinutes="30"
+            forceMinutes="true"
+        ></time-picker-component>
+
+        <br />
+
+        <p>
+            Forced Hours -- must use 24 hr hour format! (with optional 15 minute
+            step)
+        </p>
+
+        <time-picker-component
+            defaultHour="14"
+            defaultMinutes="45"
+            minutesStep="15"
+            forceHours="true"
+        ></time-picker-component>
+
+        <time-picker-component
+            defaultHour="8"
+            defaultMinutes="00"
+            minutesStep="15"
+            forceHours="true"
+        ></time-picker-component>
+
+        <time-picker-component
+            defaultHour="12"
+            defaultMinutes="00"
+            minutesStep="15"
+            forceHours="true"
+        ></time-picker-component>
+
+        <time-picker-component
+            defaultHour="24"
+            defaultMinutes="00"
+            minutesStep="15"
+            forceHours="true"
+        ></time-picker-component>
+
+        <script>
+            document
+                .querySelectorAll("time-picker-component")
+                .forEach((component) => {
+                    component.addEventListener("changed", (event) => {
+                        // Your event handling code here
+                        console.log("Time picker changed!", event.detail);
+                    });
+                });
+        </script>
+    </body>
+</html>

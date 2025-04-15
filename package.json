@@ -8,7 +8,8 @@
     "./modal/*": "./dist/modal/*.js",
     "./feedback/*": "./dist/feedback/*.js",
     "./buttons/*": "./dist/buttons/*.js",
-    "./inputs/*": "./dist/inputs/*.js"
+    "./inputs/*": "./dist/inputs/*.js",
+    "./progress/*": "./dist/progress/*.js"
   },
   "files": [
     "dist"
