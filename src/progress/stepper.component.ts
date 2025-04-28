@@ -9,11 +9,13 @@ import { styleMap } from "lit/directives/style-map.js";
 export class StepProgressComponent extends LitElement {
   // @property() defaultHour = 12;
 
+  @property() size = "0.75rem";
+
   @property() numberOfSteps = 5;
 
-  @property() currentStep = 2;
+  @property() currentStep = 0;
 
-  @property() currentStepProgress = 0.85;
+  @state() currentStepProgress = 0;
 
   @property() progressStyle: "numeric" | "flow" = "numeric";
 
@@ -28,10 +30,14 @@ export class StepProgressComponent extends LitElement {
   }
 
   increaseProgressBy(amount: number) {
-    this.currentStepProgress = Math.max(
+    const newProgress = Math.max(
       Math.min(this.currentStepProgress + amount, 1),
       0,
     );
+
+    if (newProgress !== this.currentStepProgress) {
+      this.currentStepProgress = newProgress;
+    }
   }
 
   static styles = [
@@ -49,13 +55,14 @@ export class StepProgressComponent extends LitElement {
         display: flex;
         align-items: center;
         gap: 0.35rem;
+        --size: 0.75rem;
       }
 
       div.indicator {
-        font-size: 1rem;
+        font-size: var(--size);
         font-weight: bold;
         color: #333;
-        height: 2rem;
+        height: calc(var(--size) * 2);
         aspect-ratio: 1/1;
         border-radius: 50%;
         display: flex;
@@ -92,7 +99,8 @@ export class StepProgressComponent extends LitElement {
         content: " ";
         background-color: var(--future-step-color);
         border-radius: 1rem;
-        font-size: 0.65rem;
+        font-size: calc(var(--size) / 2);
+
         overflow: hidden;
       }
 
@@ -113,6 +121,7 @@ export class StepProgressComponent extends LitElement {
         flow: this.progressStyle === "flow",
         numeric: this.progressStyle === "flow",
       })}
+      style="--size: ${this.size}"
     >
       ${map(
         range(0, this.numberOfSteps),
@@ -156,8 +165,8 @@ export class StepProgressComponent extends LitElement {
                         index < this.currentStep
                           ? `100%`
                           : index === this.currentStep
-                            ? `${this.currentStepProgress * 100}%`
-                            : "0%",
+                            ? `${(this.currentStepProgress * 100).toFixed(2)}%`
+                            : `0%`,
                     })}
                   >
                     &nbsp;
