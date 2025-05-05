@@ -137,6 +137,10 @@ export class TimezonePickerComponent extends LitElement {
     return this.selected;
   }
 
+  set value(value: string) {
+    this.selected = value;
+  }
+
   dispatchInput(e: CustomEvent<{ value: string }>) {
     this.selected = e.detail.value;
     this.ui_selected = this.options.filter(
