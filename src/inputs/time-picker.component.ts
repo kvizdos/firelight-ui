@@ -66,6 +66,14 @@ export class TimePickerComponent extends LitElement {
     return `${currHour + (amPM === "PM" ? 12 : 0)}`;
   }
 
+  set value(to: string) {
+    const v = +to;
+    this.selectedTime.hour = v % 12;
+    this.selectedTime.minutes = 0;
+    this.selectedTime.amPm = v === 12 ? "PM" : v > 12 ? "PM" : "AM";
+    this.defaultHour = v % 12;
+  }
+
   private hoursRef: Ref<HTMLInputElement> = createRef();
 
   private minutesRef: Ref<HTMLInputElement> = createRef();
