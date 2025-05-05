@@ -177,7 +177,12 @@ export class TimezonePickerComponent extends LitElement {
   }
 
   private handleHotkey = (e: KeyboardEvent) => {
-    if (!e.ctrlKey && !e.metaKey && !e.altKey && e.target === this) {
+    if (
+      !e.ctrlKey &&
+      !e.metaKey &&
+      !e.altKey &&
+      (this.pickerRef.value!.open || document.activeElement === this)
+    ) {
       const key = e.key.toLowerCase();
       const tz = this.options.filter((opt) =>
         opt.ui_key.toLowerCase().startsWith(key),

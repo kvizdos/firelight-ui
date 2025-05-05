@@ -37,7 +37,7 @@ export class DropdownSelectorComponent extends LitElement {
   @property() renderFunction: (item: DropdownItem) => TemplateResult = (item) =>
     html` <p style="margin: 0;">${item.ui_key ?? item.key}</p>`;
 
-  @state() private open = false;
+  @state() open = false;
   @state() private selected?: DropdownItem;
   @state() private focusedIndex: number | null = null;
   @state() private query: string = "";
@@ -220,7 +220,17 @@ export class DropdownSelectorComponent extends LitElement {
 
   render() {
     return html`
-      <div id="container">
+      <div
+        id="container"
+        @focusout=${(e: FocusEvent) => {
+          const related = e.relatedTarget as HTMLElement | null;
+
+          // Only close if focus moved somewhere *outside* the dropdown
+          if (!related || !related.closest('[data-is-dropdown="true"]')) {
+            this.open = false;
+          }
+        }}
+      >
         <input
           readonly
           placeholder="${this.placeholder}"
@@ -260,6 +270,7 @@ export class DropdownSelectorComponent extends LitElement {
           ${this.filteredItems.map(
             (item, i) => html`
               <button
+                data-is-dropdown="true"
                 aria-label="${item.label}"
                 id="option-${i}"
                 role="option"
