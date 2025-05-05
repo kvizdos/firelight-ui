@@ -206,6 +206,18 @@ export class DropdownSelectorComponent extends LitElement {
     }
   }
 
+  set value(key: string) {
+    const v = this.items.filter((opt) => opt.key === key);
+    if (v.length === 0) {
+      throw new Error("Invalid key: " + key);
+    }
+
+    const [opt] = v;
+    this.open = false;
+    this.selected = opt;
+    this.query = opt.ui_key ?? opt.key;
+  }
+
   render() {
     return html`
       <div id="container">

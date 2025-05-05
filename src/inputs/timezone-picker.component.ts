@@ -1,6 +1,8 @@
 import { LitElement, html, css } from "lit";
 import { property, state, customElement } from "lit/decorators.js";
 import "./dropdown-selector.component";
+import { createRef, ref, Ref } from "lit/directives/ref.js";
+import { DropdownSelectorComponent } from "./dropdown-selector.component";
 
 interface TimezoneOption {
   ui_key: string;
@@ -13,6 +15,8 @@ interface TimezoneOption {
 @customElement("timezone-picker")
 export class TimezonePickerComponent extends LitElement {
   static formAssociated = true;
+
+  private pickerRef: Ref<DropdownSelectorComponent> = createRef();
 
   @state() selected: string = "";
 
@@ -138,7 +142,14 @@ export class TimezonePickerComponent extends LitElement {
   }
 
   set value(value: string) {
+    const found = this.getOptions().filter((opt) => opt.key === value)[0];
+    if (found === undefined) {
+      throw new Error("Unknown timezone");
+    }
+
     this.selected = value;
+    this.ui_selected = found.ui_key;
+    this.pickerRef.value!.value = value;
   }
 
   dispatchInput(e: CustomEvent<{ value: string }>) {
@@ -155,6 +166,35 @@ export class TimezonePickerComponent extends LitElement {
     );
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener("keydown", this.handleHotkey);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener("keydown", this.handleHotkey);
+  }
+
+  private handleHotkey = (e: KeyboardEvent) => {
+    if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+      const key = e.key.toLowerCase();
+      const tz = this.options.filter((opt) =>
+        opt.ui_key.toLowerCase().startsWith(key),
+      );
+      if (tz.length > 0) {
+        this.value = tz[0].key;
+        this.dispatchEvent(
+          new CustomEvent("fl-input", {
+            detail: { value: this.value },
+            bubbles: true,
+            composed: true,
+          }),
+        );
+      }
+    }
+  };
+
   static styles = [
     css`
       :host {
@@ -165,6 +205,7 @@ export class TimezonePickerComponent extends LitElement {
 
   render() {
     return html` <dropdown-selector
+      ${ref(this.pickerRef)}
       .items=${this.options}
       .renderFunction=${this.renderOption}
       .placeholder=${this.ui_selected || "Enter your Timezone"}
