@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script
+            type="module"
+            src="/dist/inputs/radio-input.component.js"
+        ></script>
+    </head>
+    <body>
+        <radio-input></radio-input>
+
+        <script>
+            document
+                .querySelectorAll("checkbox-component")
+                .forEach((component) => {
+                    component.addEventListener("checked", (event) => {
+                        // Your event handling code here
+                        console.log("Checkbox clicked!", event.detail);
+                    });
+                });
+        </script>
+    </body>
+</html>
