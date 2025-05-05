@@ -21,7 +21,8 @@ export interface MultistepFormQuestion {
     | "radio"
     | "checkbox"
     | "checkbox"
-    | "hour-picker";
+    | "hour-picker"
+    | "timezone";
   autocomplete?: string;
 }
 

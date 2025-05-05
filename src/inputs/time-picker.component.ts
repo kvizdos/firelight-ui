@@ -74,7 +74,6 @@ export class TimePickerComponent extends LitElement {
 
   firstUpdated() {
     if (this.defaultTo !== "") {
-      console.warn("DEFAULTING TO", this.defaultTo);
       const setHoursTo = +this.defaultTo;
 
       if (setHoursTo == 12) {

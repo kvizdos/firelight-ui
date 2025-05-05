@@ -17,6 +17,7 @@ import { ifRegexDefined } from "../directives/pattern-regex.directive";
 import { emailRegex } from "../regex/email.pattern";
 import { createRef, ref, Ref } from "lit/directives/ref.js";
 import { StepProgressComponent } from "../progress/stepper.component";
+import "../inputs/timezone-picker.component";
 
 @customElement("multistep-form")
 export class MultistepFormComponent extends LitElement {
@@ -31,7 +32,34 @@ export class MultistepFormComponent extends LitElement {
   progressRef: Ref<StepProgressComponent> = createRef();
 
   @property() form: MultistepForm = {
-    stages: [],
+    stages: [
+      {
+        id: "test",
+        title: "Hello",
+        description: "type somethign!",
+        questions: [
+          {
+            id: "tz",
+            label: "Select your Timezone",
+            type: "timezone",
+            required: true,
+          },
+        ],
+      },
+
+      {
+        id: "test2",
+        title: "Hello 2",
+        description: "type somethign!",
+        questions: [
+          {
+            id: "tz2",
+            label: "Select your Timezone",
+            type: "timezone",
+          },
+        ],
+      },
+    ],
   };
 
   static styles = [
@@ -117,6 +145,19 @@ export class MultistepFormComponent extends LitElement {
     stageID: string,
     question: MultistepFormQuestion,
   ) {
+    if (question.type === "timezone") {
+      const { value } = (e as CustomEvent<{ value: string }>).detail;
+      // Save the value
+      this.values = {
+        ...this.values,
+        [stageID]: {
+          ...this.values[stageID],
+          [question.id]: value,
+        },
+      };
+
+      return;
+    }
     if (question.type === "checkbox") {
       const { status } = (e as CustomEvent<{ status: boolean }>).detail;
 
@@ -190,13 +231,6 @@ export class MultistepFormComponent extends LitElement {
         `#${q.id}`,
       ) as HTMLInputElement;
 
-      console.table({
-        qid: q.id,
-        type: q.type,
-        value: value,
-        input: input?.value,
-      });
-
       if (input?.value.length > 0) {
         if (input?.validity.valid && !!value) {
           return true;
@@ -268,6 +302,20 @@ export class MultistepFormComponent extends LitElement {
                         this.onInput(e, stage.id, question)}
                     ></checkbox-component>
                     <p>${question.label}</p>
+                  </div>`;
+                }
+
+                if (question.type === "timezone") {
+                  return html`<div class="input-container">
+                    <label for="${question.id}">${question.label}</label>
+
+                    <timezone-picker
+                      .forceSelected=${this.values[stage.id]?.[question.id] ??
+                      ""}
+                      id="${question.id}"
+                      @fl-input=${(e: InputEvent) =>
+                        this.onInput(e, stage.id, question)}
+                    ></timezone-picker>
                   </div>`;
                 }
 

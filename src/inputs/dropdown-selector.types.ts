@@ -1,0 +1,3 @@
+interface DropdownItem {
+  key: string;
+}
