@@ -30,6 +30,8 @@
         <br />
         <button id="openbtnDate">Do a Date Prompt</button>
         <br />
+        <button id="openbtnRadio">Do a Radio</button>
+        <br />
         <button id="openbtnTextArea">Do a Text Area Prompt</button>
         <br />
         <button>A random button to test accessibility</button>
@@ -53,6 +55,35 @@
 
                 alert("You typed: " + resp.value);
             };
+
+            document.getElementById("openbtnRadio").onclick =
+                async function () {
+                    const resp = await Prompt({
+                        title: "Enter some text!",
+                        description: "This is a Text prompt",
+                        type: "radio",
+                        radioDefaultKey: "test-2",
+                        radioOptions: [
+                            {
+                                key: "test",
+                                title: "Test Item 1",
+                                description: "This is an example item.",
+                            },
+                            {
+                                key: "test-2",
+                                title: "Test Item 2",
+                                description: "This is a another example item.",
+                            },
+                        ],
+                    });
+
+                    if (resp.canceled) {
+                        alert("You canceled.");
+                        return;
+                    }
+
+                    alert("You typed: " + resp.value);
+                };
 
             document.getElementById("openbtnNumber").onclick =
                 async function () {

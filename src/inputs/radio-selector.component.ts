@@ -69,6 +69,16 @@ export class RadioSelectorComponent extends LitElement {
     `,
   ];
 
+  handleClick(choice: RadioSelectorType) {
+    this.activeChoice = choice.key;
+    const event = new CustomEvent("selected", {
+      detail: {
+        key: choice.key,
+      },
+    });
+    this.dispatchEvent(event);
+  }
+
   render() {
     return html`<div id="container">
       ${repeat(
@@ -78,7 +88,7 @@ export class RadioSelectorComponent extends LitElement {
           html`<div
             class="choice"
             @click=${() => {
-              this.activeChoice = choice.key;
+              this.handleClick(choice);
             }}
           >
             <div>

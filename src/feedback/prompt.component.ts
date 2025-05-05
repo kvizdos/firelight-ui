@@ -2,6 +2,7 @@ import { LitElement, html, css, PropertyValues } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
+import "../inputs/radio-selector.component";
 
 import "../modal/modal.component";
 import "../buttons/button.component";
@@ -11,6 +12,7 @@ import {
   PromptResponse,
   PromptType,
 } from "./feedback.functions";
+import { RadioSelectorType } from "../inputs/radio-selector.types";
 
 @customElement("prompt-component")
 export class PromptComponent extends LitElement {
@@ -68,6 +70,10 @@ export class PromptComponent extends LitElement {
 
   @state() promptPatternError?: string = "";
 
+  @state() promptRadioChoices?: RadioSelectorType[] = [];
+
+  @state() promptRadioDefault?: string = undefined;
+
   inputRef = createRef();
 
   constructor() {
@@ -92,6 +98,8 @@ export class PromptComponent extends LitElement {
     this.promptDescription = detail.description;
     this.promptPattern = detail.pattern;
     this.promptPatternError = detail.patternError;
+    this.promptRadioChoices = detail.radioOptions;
+    this.promptRadioDefault = detail.radioDefaultKey;
     this.open = true;
   };
 
@@ -133,6 +141,8 @@ export class PromptComponent extends LitElement {
     this.promptValue = "";
     this.promptPattern = "";
     this.promptPatternError = "";
+    this.promptRadioChoices = undefined;
+    this.promptRadioDefault = undefined;
     (this.shadowRoot?.getElementById("input") as HTMLInputElement).value = "";
   }
 
@@ -160,6 +170,43 @@ export class PromptComponent extends LitElement {
     }
   }
 
+  getPromptArea() {
+    switch (this.promptType) {
+      case "textarea":
+        return html`<textarea
+          id="input"
+          @input=${this.handleChange}
+          placeholder="type something"
+          style="flex-grow: 1;"
+        ></textarea>`;
+      case "radio":
+        return html` <radio-selector
+          id="input"
+          style="margin: 0.6rem 0;"
+          .default=${this.promptRadioDefault}
+          .choices=${this.promptRadioChoices}
+          @selected=${(e: CustomEvent<{ key: string }>) => {
+            this.promptValue = e.detail.key;
+          }}
+        ></radio-selector>`;
+      default:
+        return html`<input
+            ${ref(this.inputRef)}
+            pattern=${ifDefined(this.promptPattern || undefined)}
+            step="${this.promptType === "decimal" ? "0.01" : ""}"
+            type="${this.promptType === "decimal" ? "number" : this.promptType}"
+            inputmode="${this.getInputMode()}"
+            id="input"
+            @input=${this.handleChange}
+            placeholder="type something"
+          />
+          ${this.promptPatternError &&
+          !(this.inputRef.value! as HTMLInputElement)?.validity?.valid
+            ? html` <p class="error">${this.promptPatternError}</p>`
+            : ""}`;
+    }
+  }
+
   render() {
     return html`<modal-component
       .open=${this.open}
@@ -171,31 +218,7 @@ export class PromptComponent extends LitElement {
           ${this.promptDescription !== ""
             ? html` <p>${this.promptDescription}</p> `
             : undefined}
-          ${this.promptType === "textarea"
-            ? html` <textarea
-                id="input"
-                @input=${this.handleChange}
-                placeholder="type something"
-                style="flex-grow: 1;"
-              ></textarea>`
-            : html`
-                <input
-                  ${ref(this.inputRef)}
-                  pattern=${ifDefined(this.promptPattern || undefined)}
-                  step="${this.promptType === "decimal" ? "0.01" : ""}"
-                  type="${this.promptType === "decimal"
-                    ? "number"
-                    : this.promptType}"
-                  inputmode="${this.getInputMode()}"
-                  id="input"
-                  @input=${this.handleChange}
-                  placeholder="type something"
-                />
-                ${this.promptPatternError &&
-                !(this.inputRef.value! as HTMLInputElement)?.validity?.valid
-                  ? html` <p class="error">${this.promptPatternError}</p>`
-                  : ""}
-              `}
+          ${this.getPromptArea()}
         </div>
 
         <button-component

@@ -1,3 +1,5 @@
+import { RadioSelectorType } from "../inputs/radio-selector.types";
+
 export interface AlertInterface {
   title: string;
   description?: string;
@@ -25,7 +27,8 @@ export type PromptType =
   | "decimal"
   | "tel"
   | "textarea"
-  | "date";
+  | "date"
+  | "radio";
 
 export interface PromptInterface {
   id: string;
@@ -34,6 +37,8 @@ export interface PromptInterface {
   type: PromptType;
   pattern?: string;
   patternError?: string;
+  radioOptions?: RadioSelectorType[];
+  radioDefaultKey?: string;
 }
 
 export interface PromptResponse {
