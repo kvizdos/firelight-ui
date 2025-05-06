@@ -3,17 +3,21 @@
   "version": "0.9.0",
   "type": "module",
   "exports": {
-    "./charts/bar-chart.component": {
-      "import": "./dist/charts/bar-chart.component.js",
-      "types": "./dist/charts/bar-chart.component.d.ts"
-    },
     "./animations/tweener.component": {
       "import": "./dist/animations/tweener.component.js",
       "types": "./dist/animations/tweener.component.d.ts"
     },
-    "./modal/modal.component": {
-      "import": "./dist/modal/modal.component.js",
-      "types": "./dist/modal/modal.component.d.ts"
+    "./buttons/button.component": {
+      "import": "./dist/buttons/button.component.js",
+      "types": "./dist/buttons/button.component.d.ts"
+    },
+    "./charts/bar-chart.component": {
+      "import": "./dist/charts/bar-chart.component.js",
+      "types": "./dist/charts/bar-chart.component.d.ts"
+    },
+    "./directives/pattern-regex.directive": {
+      "import": "./dist/directives/pattern-regex.directive.js",
+      "types": "./dist/directives/pattern-regex.directive.d.ts"
     },
     "./feedback/alert.component": {
       "import": "./dist/feedback/alert.component.js",
@@ -38,10 +42,6 @@
     "./feedback/prompt.component": {
       "import": "./dist/feedback/prompt.component.js",
       "types": "./dist/feedback/prompt.component.d.ts"
-    },
-    "./buttons/button.component": {
-      "import": "./dist/buttons/button.component.js",
-      "types": "./dist/buttons/button.component.d.ts"
     },
     "./inputs/checkbox.component": {
       "import": "./dist/inputs/checkbox.component.js",
@@ -75,16 +75,28 @@
       "import": "./dist/inputs/timezone-picker.component.js",
       "types": "./dist/inputs/timezone-picker.component.d.ts"
     },
+    "./modal/modal.component": {
+      "import": "./dist/modal/modal.component.js",
+      "types": "./dist/modal/modal.component.d.ts"
+    },
     "./progress/stepper.component": {
       "import": "./dist/progress/stepper.component.js",
       "types": "./dist/progress/stepper.component.d.ts"
+    },
+    "./regex/email.pattern": {
+      "import": "./dist/regex/email.pattern.js",
+      "types": "./dist/regex/email.pattern.d.ts"
+    },
+    "./styles/inputs.style": {
+      "import": "./dist/styles/inputs.style.js",
+      "types": "./dist/styles/inputs.style.d.ts"
     }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "rimraf ./dist && tsc",
+    "build": "rimraf ./dist && tsc --declaration",
     "dev": "rimraf ./dist && tsc --watch",
     "lint": "eslint 'src/**/*.{ts,js}'",
     "serve": "web-dev-server --open --watch --node-resolve"

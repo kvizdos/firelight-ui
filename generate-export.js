@@ -1,32 +1,31 @@
-// generate-exports.js
-import { readdirSync, statSync } from 'fs';
-import path from 'path';
+// scripts/generate-exports.js
+import { readdirSync, statSync } from "fs";
+import { join, relative, parse } from "path";
 
-const baseDirs = ['charts', 'animations', 'modal', 'feedback', 'buttons', 'inputs', 'progress'];
-const distDir = './dist';
+function walk(dir, prefix = "") {
+	const files = readdirSync(dir, { withFileTypes: true });
+	const exports = {};
 
-const exportsMap = {
-  '.': {
-    import: './dist/index.js',
-    types: './dist/index.d.ts',
-  },
-};
+	for (const file of files) {
+		const fullPath = join(dir, file.name);
+		const relPath = relative("dist", fullPath).replace(/\\/g, "/");
 
-for (const dir of baseDirs) {
-  const fullPath = path.join(distDir, dir);
-  const files = readdirSync(fullPath);
+		if (file.isDirectory()) {
+			Object.assign(exports, walk(fullPath, `${prefix}/${file.name}`));
+		} else if (file.isFile() && file.name.endsWith(".js")) {
+			const { dir: jsDir, name } = parse(relPath);
+			const key = `${prefix}/${name}`;
+			const basePath = `./dist/${jsDir}/${name}`;
 
-  for (const file of files) {
-    const jsMatch = file.match(/^(.*)\.js$/);
-    if (!jsMatch) continue;
+			exports[`./${jsDir}/${name}`] = {
+				import: `${basePath}.js`,
+				types: `${basePath}.d.ts`,
+			};
+		}
+	}
 
-    const baseName = jsMatch[1];
-    const subpath = `./${dir}/${baseName}`;
-    exportsMap[subpath] = {
-      import: `./dist/${dir}/${baseName}.js`,
-      types: `./dist/${dir}/${baseName}.d.ts`,
-    };
-  }
+	return exports;
 }
 
-console.log(JSON.stringify({ exports: exportsMap }, null, 2));
+const result = walk("dist");
+console.log(JSON.stringify({ exports: result }, null, 2));

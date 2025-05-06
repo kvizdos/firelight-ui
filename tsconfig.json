@@ -19,7 +19,12 @@
     "sourceMap": true,
     "strict": true,
     "experimentalDecorators": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "declarationMap": true, // helpful for source navigation in IDEs
+    "preserveSymlinks": true, // ensures proper resolution when consumed via `npm link`
+    "resolveJsonModule": true, // just in case future components import JSON
+    "forceConsistentCasingInFileNames": true, // ensures no casing mismatches (esp. cross-platform)
+    "allowSyntheticDefaultImports": true // better compatibility across tooling
   },
   "include": ["src/**/*.ts"]
 }
