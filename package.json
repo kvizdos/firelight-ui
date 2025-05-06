@@ -3,13 +3,82 @@
   "version": "0.8.0",
   "type": "module",
   "exports": {
-    "./charts/*": "./dist/charts/*.js",
-    "./animations/*": "./dist/animations/*.js",
-    "./modal/*": "./dist/modal/*.js",
-    "./feedback/*": "./dist/feedback/*.js",
-    "./buttons/*": "./dist/buttons/*.js",
-    "./inputs/*": "./dist/inputs/*.js",
-    "./progress/*": "./dist/progress/*.js"
+    "./charts/bar-chart.component": {
+      "import": "./dist/charts/bar-chart.component.js",
+      "types": "./dist/charts/bar-chart.component.d.ts"
+    },
+    "./animations/tweener.component": {
+      "import": "./dist/animations/tweener.component.js",
+      "types": "./dist/animations/tweener.component.d.ts"
+    },
+    "./modal/modal.component": {
+      "import": "./dist/modal/modal.component.js",
+      "types": "./dist/modal/modal.component.d.ts"
+    },
+    "./feedback/alert.component": {
+      "import": "./dist/feedback/alert.component.js",
+      "types": "./dist/feedback/alert.component.d.ts"
+    },
+    "./feedback/confirm.component": {
+      "import": "./dist/feedback/confirm.component.js",
+      "types": "./dist/feedback/confirm.component.d.ts"
+    },
+    "./feedback/feedback.functions": {
+      "import": "./dist/feedback/feedback.functions.js",
+      "types": "./dist/feedback/feedback.functions.d.ts"
+    },
+    "./feedback/multistep-form.component": {
+      "import": "./dist/feedback/multistep-form.component.js",
+      "types": "./dist/feedback/multistep-form.component.d.ts"
+    },
+    "./feedback/multistep-form.types": {
+      "import": "./dist/feedback/multistep-form.types.js",
+      "types": "./dist/feedback/multistep-form.types.d.ts"
+    },
+    "./feedback/prompt.component": {
+      "import": "./dist/feedback/prompt.component.js",
+      "types": "./dist/feedback/prompt.component.d.ts"
+    },
+    "./buttons/button.component": {
+      "import": "./dist/buttons/button.component.js",
+      "types": "./dist/buttons/button.component.d.ts"
+    },
+    "./inputs/checkbox.component": {
+      "import": "./dist/inputs/checkbox.component.js",
+      "types": "./dist/inputs/checkbox.component.d.ts"
+    },
+    "./inputs/dropdown-selector.component": {
+      "import": "./dist/inputs/dropdown-selector.component.js",
+      "types": "./dist/inputs/dropdown-selector.component.d.ts"
+    },
+    "./inputs/dropdown-selector.types": {
+      "import": "./dist/inputs/dropdown-selector.types.js",
+      "types": "./dist/inputs/dropdown-selector.types.d.ts"
+    },
+    "./inputs/radio-input.component": {
+      "import": "./dist/inputs/radio-input.component.js",
+      "types": "./dist/inputs/radio-input.component.d.ts"
+    },
+    "./inputs/radio-selector.component": {
+      "import": "./dist/inputs/radio-selector.component.js",
+      "types": "./dist/inputs/radio-selector.component.d.ts"
+    },
+    "./inputs/radio-selector.types": {
+      "import": "./dist/inputs/radio-selector.types.js",
+      "types": "./dist/inputs/radio-selector.types.d.ts"
+    },
+    "./inputs/time-picker.component": {
+      "import": "./dist/inputs/time-picker.component.js",
+      "types": "./dist/inputs/time-picker.component.d.ts"
+    },
+    "./inputs/timezone-picker.component": {
+      "import": "./dist/inputs/timezone-picker.component.js",
+      "types": "./dist/inputs/timezone-picker.component.d.ts"
+    },
+    "./progress/stepper.component": {
+      "import": "./dist/progress/stepper.component.js",
+      "types": "./dist/progress/stepper.component.d.ts"
+    }
   },
   "files": [
     "dist"
