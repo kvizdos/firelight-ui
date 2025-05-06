@@ -210,6 +210,7 @@ export class TimezonePickerComponent extends LitElement {
 
   render() {
     return html` <dropdown-selector
+      .maxHeight=${"14rem"}
       ${ref(this.pickerRef)}
       .items=${this.options}
       .renderFunction=${this.renderOption}

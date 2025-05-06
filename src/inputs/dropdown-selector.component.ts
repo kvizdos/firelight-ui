@@ -15,6 +15,8 @@ interface DropdownItem {
 export class DropdownSelectorComponent extends LitElement {
   @state() private showScrollGradient = true;
 
+  @property() maxHeight: string = "2.25rem";
+
   @property() placeholder: string = "";
 
   @property() items: DropdownItem[] = [
@@ -148,16 +150,16 @@ export class DropdownSelectorComponent extends LitElement {
         box-sizing: border-box;
         border-radius: 0rem 0rem 0.5rem 0.5rem;
         overflow: scroll;
-        max-height: 14rem;
+        max-height: var(--max-height);
       }
       .scrollArea {
         box-sizing: border-box;
         position: absolute;
-        bottom: -14rem;
+        bottom: calc(-1 * var(--max-height));
         width: 100%;
         height: 5px;
         z-index: 11;
-        height: 30px;
+        height: 45px;
         background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white);
         pointer-events: none;
         border-left: 1px solid var(--dropdown-border, var(--gray-200, #cecece));
@@ -179,6 +181,7 @@ export class DropdownSelectorComponent extends LitElement {
         border: none;
         background: none;
         cursor: pointer;
+        color: unset;
       }
       button:not(:last-of-type) {
         border-bottom: 1px solid #cecece;
@@ -222,13 +225,16 @@ export class DropdownSelectorComponent extends LitElement {
     return html`
       <div
         id="container"
+        style="--max-height: ${this.maxHeight};"
         @focusout=${(e: FocusEvent) => {
           const related = e.relatedTarget as HTMLElement | null;
 
-          // Only close if focus moved somewhere *outside* the dropdown
-          if (!related || !related.closest('[data-is-dropdown="true"]')) {
-            this.open = false;
-          }
+          // iOS / Mobile patch; without this, focusout fires before onclick
+          setTimeout(() => {
+            if (!related || !related.closest('[data-is-dropdown="true"]')) {
+              this.open = false;
+            }
+          }, 0);
         }}
       >
         <input
