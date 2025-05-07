@@ -3,12 +3,14 @@ import { state, customElement, property } from "lit/decorators.js";
 import { repeat } from "lit/directives/repeat.js";
 import "./radio-input.component";
 import { RadioSelectorType } from "./radio-selector.types";
+import { classMap } from "lit/directives/class-map.js";
 
 @customElement("radio-selector")
 export class RadioSelectorComponent extends LitElement {
   @property() default: string = "";
 
   @state() activeChoice: string = "";
+  @state() hoveringChoiceKey: string = "";
   @property() choices: RadioSelectorType[] = [
     {
       key: "small",
@@ -89,9 +91,20 @@ export class RadioSelectorComponent extends LitElement {
             @click=${() => {
               this.handleClick(choice);
             }}
+            @mouseenter=${() => {
+              this.hoveringChoiceKey = choice.key;
+              console.log("mouse over");
+            }}
+            @mouseleave=${() => {
+              this.hoveringChoiceKey = "";
+              console.log("mouse leave");
+            }}
           >
             <div>
               <radio-input
+                class="${classMap({
+                  "emulate-hover": this.hoveringChoiceKey === choice.key,
+                })}"
                 .label=${`${choice.key}: ${choice.description}`}
                 .enabled=${this.activeChoice === choice.key ||
                 (this.activeChoice === "" && this.default === choice.key)}

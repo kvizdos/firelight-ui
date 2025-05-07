@@ -36,7 +36,7 @@ export class RadioInputComponent extends LitElement {
         transition: 250ms;
       }
 
-      :host.emulate-hover,
+      :host(.emulate-hover) button svg,
       button:hover svg,
       button:focus-visible svg {
         transition: 250ms;
