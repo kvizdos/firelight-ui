@@ -1,6 +1,5 @@
-import { LitElement, html, css, TemplateResult } from "lit";
+import { LitElement, html, css } from "lit";
 import { state, customElement, property } from "lit/decorators.js";
-import { classMap } from "lit/directives/class-map.js";
 import { repeat } from "lit/directives/repeat.js";
 import "./radio-input.component";
 import { RadioSelectorType } from "./radio-selector.types";

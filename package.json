@@ -75,6 +75,18 @@
       "import": "./dist/inputs/timezone-picker.component.js",
       "types": "./dist/inputs/timezone-picker.component.d.ts"
     },
+    "./layouts/confetti.layout": {
+      "import": "./dist/layouts/confetti.layout.js",
+      "types": "./dist/layouts/confetti.layout.d.ts"
+    },
+    "./layouts/dashboard.layout": {
+      "import": "./dist/layouts/dashboard.layout.js",
+      "types": "./dist/layouts/dashboard.layout.d.ts"
+    },
+    "./layouts/subnav.layout": {
+      "import": "./dist/layouts/subnav.layout.js",
+      "types": "./dist/layouts/subnav.layout.d.ts"
+    },
     "./modal/modal.component": {
       "import": "./dist/modal/modal.component.js",
       "types": "./dist/modal/modal.component.d.ts"
@@ -102,6 +114,8 @@
     "serve": "web-dev-server --open --watch --node-resolve"
   },
   "dependencies": {
+    "@vaadin/router": "^2.0.0",
+    "js-confetti": "^0.12.0",
     "lit": "^3.0.0"
   },
   "devDependencies": {

@@ -1,7 +1,6 @@
 import { LitElement, html, css } from "lit";
 import { property, state, customElement } from "lit/decorators.js";
 import { createRef, ref, Ref } from "lit/directives/ref.js";
-import { ifDefined } from "lit-html/directives/if-defined.js";
 
 export interface TimePickerInput {
   hour: number;

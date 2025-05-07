@@ -11,10 +11,8 @@ import {
   MultistepFormStage,
   MultistepFormValues,
 } from "./multistep-form.types";
-import { map } from "lit/directives/map.js";
 import { repeat } from "lit/directives/repeat.js";
 import { ifRegexDefined } from "../directives/pattern-regex.directive";
-import { emailRegex } from "../regex/email.pattern";
 import { createRef, ref, Ref } from "lit/directives/ref.js";
 import { StepProgressComponent } from "../progress/stepper.component";
 import "../inputs/timezone-picker.component";
@@ -27,7 +25,7 @@ export class MultistepFormComponent extends LitElement {
 
   @state() private fieldValidity: Record<string, boolean> = {};
 
-  @state() private callbackLoading: Boolean = false;
+  @state() private callbackLoading: boolean = false;
 
   progressRef: Ref<StepProgressComponent> = createRef();
 

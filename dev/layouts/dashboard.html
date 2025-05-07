@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script type="module">
+            import { DashboardLayoutComponent } from "/dist/layouts/dashboard.layout.js";
+
+            DashboardLayoutComponent.setNavbars({
+                user: {
+                    left: [
+                        {
+                            name: "Dashboard",
+                            path: "/dev/layouts/dashboard.html",
+                            dropdown: [
+                                { name: "Really Lonnnggg", path: "#" },
+                                { name: "Shorty", path: "#" },
+                            ],
+                        },
+                        {
+                            name: "Users",
+                            path: "#",
+                            dropdown: [
+                                { name: "Paused", path: "#" },
+                                { name: "Pending", path: "#" },
+                            ],
+                        },
+                    ],
+                    right: [{ name: "Example", path: "#" }],
+                },
+            });
+        </script>
+
+        <script type="module" src="/dist/layouts/dashboard.layout.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            * {
+                font-family: "Inter", sans-serif;
+            }
+            body {
+                margin: 0;
+            }
+            * {
+                --primary-50: #f2f8fd;
+                --primary-100: #e4eefa;
+                --primary-200: #c3ddf4;
+                --primary-300: #8dc1ec;
+                --primary-400: #51a1df;
+                --primary-500: #2a85cd;
+                --primary-600: #1e73be;
+                --primary-700: #17548d;
+                --primary-800: #174875;
+                --primary-900: #193e61;
+                --primary-950: #102741;
+                --danger-50: #fff1f2;
+                --danger-100: #ffe4e6;
+                --danger-200: #fecdd3;
+                --danger-300: #fda4af;
+                --danger-400: #fb7185;
+                --danger-500: #f3405d;
+                --danger-600: #e01e47;
+                --danger-700: #b8123a;
+                --danger-800: #9f1239;
+                --danger-900: #881337;
+                --danger-950: #4c0519;
+
+                --gray-50: #f8f8f8;
+                --gray-100: #eaeaea;
+                --gray-200: #dcdcdc;
+                --gray-300: #bdbdbd;
+                --gray-400: #989898;
+                --gray-500: #7c7c7c;
+                --gray-600: #656565;
+                --gray-700: #525252;
+                --gray-800: #464646;
+                --gray-900: #3d3d3d;
+                --gray-950: #292929;
+            }
+
+            dashboard-layout[unresolved] {
+                visibility: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <dashboard-layout unresolved>
+            <h1>Hello World</h1>
+            <p>Such an easy dashboard layout</p>
+        </dashboard-layout>
+    </body>
+</html>
