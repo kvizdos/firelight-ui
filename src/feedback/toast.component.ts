@@ -253,7 +253,7 @@ export class ToastComponent extends LitElement {
 }
 
 export function NotifyToast(opts: {
-  id: string;
+  id?: string | number;
   text: string;
   danger?: boolean;
   persist?: boolean;
