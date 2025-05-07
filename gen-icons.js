@@ -39,7 +39,7 @@ for (const file of files) {
 		.replace(/`/g, "\\`") // escape backticks
 		.replace(/\n\s*/g, ""); // remove newlines and extra space
 
-	iconMap.push(`  ${name}: html\`${minified}\`,`);
+	iconMap.push(`  "${name}": html\`${minified}\`,`);
 }
 
 const result = `import { html } from 'lit';\n\nexport const icons: Record<string, ReturnType<typeof html>> = {\n${iconMap.join("\n")}\n};\n`;
