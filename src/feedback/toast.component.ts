@@ -113,6 +113,8 @@ export class ToastComponent extends LitElement {
       @media (min-width: 680px) {
         .toast {
           width: fit-content;
+          min-width: 12rem;
+          justify-content: center;
         }
       }
 
