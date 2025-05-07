@@ -1,5 +1,5 @@
 import { LitElement, html, css, TemplateResult } from "lit";
-import { property } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import "./confetti.layout";
 import { Router } from "@vaadin/router";
 import "../feedback/prompt.component";
@@ -24,6 +24,7 @@ interface Navbars {
   [role: string]: NavbarItems; // Index signature to allow any string as a key
 }
 
+@customElement("dashboard-layout")
 export class DashboardLayoutComponent extends LitElement {
   static styles = [
     css`
@@ -427,5 +428,3 @@ export class DashboardLayoutComponent extends LitElement {
     </div>`;
   }
 }
-
-customElements.define("dashboard-layout", DashboardLayoutComponent);
