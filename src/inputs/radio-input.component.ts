@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "lit";
-import { state, customElement, property } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 
 @customElement("radio-input")
