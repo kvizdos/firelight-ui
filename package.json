@@ -43,6 +43,10 @@
       "import": "./dist/feedback/prompt.component.js",
       "types": "./dist/feedback/prompt.component.d.ts"
     },
+    "./feedback/toast.component": {
+      "import": "./dist/feedback/toast.component.js",
+      "types": "./dist/feedback/toast.component.d.ts"
+    },
     "./inputs/checkbox.component": {
       "import": "./dist/inputs/checkbox.component.js",
       "types": "./dist/inputs/checkbox.component.d.ts"
