@@ -30,6 +30,7 @@ export class IconComponent extends LitElement {
     svg {
       width: var(--size);
       height: var(--size);
+      display: block;
     }
 
     .hoverable svg * {
