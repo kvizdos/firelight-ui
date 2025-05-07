@@ -4,7 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { repeat } from "lit/directives/repeat.js";
 
 export interface Toast {
-  id: number;
+  id: number | string;
   text: string;
   danger: boolean;
   duration: number;
@@ -154,8 +154,14 @@ export class ToastComponent extends LitElement {
   constructor() {
     super();
 
+    window.addEventListener("close-toast", (e: Event) => {
+      const id = (e as CustomEvent).detail.id;
+      this.removeToastById(id);
+    });
+
     window.addEventListener("do-toast", (e: Event) => {
       const {
+        id: customID,
         text,
         danger,
         persist,
@@ -166,7 +172,7 @@ export class ToastComponent extends LitElement {
 
       const duration =
         customDuration !== undefined ? customDuration : danger ? 8000 : 2500;
-      const id = globalId++;
+      const id = customID ?? globalId++;
 
       const toast: Toast = {
         id,
@@ -178,7 +184,7 @@ export class ToastComponent extends LitElement {
         onClick,
       };
 
-      this.toastState = [...this.toasts, toast];
+      this.toasts = [...this.toasts, toast];
 
       if (!persist) {
         setTimeout(() => this.removeToastById(id), duration);
@@ -186,7 +192,7 @@ export class ToastComponent extends LitElement {
     });
   }
 
-  private removeToastById(id: number) {
+  private removeToastById(id: number | string) {
     const toast = this.toasts.find((t) => t.id === id);
     if (!toast) return;
 
@@ -247,6 +253,7 @@ export class ToastComponent extends LitElement {
 }
 
 export function NotifyToast(opts: {
+  id: string;
   text: string;
   danger?: boolean;
   persist?: boolean;
@@ -257,6 +264,7 @@ export function NotifyToast(opts: {
   window.dispatchEvent(
     new CustomEvent("do-toast", {
       detail: {
+        id: opts.id,
         text: opts.text,
         danger: opts.danger ?? false,
         persist: opts.persist ?? false,
@@ -264,6 +272,14 @@ export function NotifyToast(opts: {
         onClick: opts.onClick,
         duration: opts.duration,
       },
+    }),
+  );
+}
+
+export function DismissToast(id: number | string) {
+  window.dispatchEvent(
+    new CustomEvent("close-toast", {
+      detail: { id },
     }),
   );
 }

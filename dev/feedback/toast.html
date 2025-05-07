@@ -67,12 +67,17 @@
         <br />
         <button id="openBtnOnClick">Do a Toast with Action</button>
         <br />
+        <button id="closePersistentToast">Close Persistent Toast(s)</button>
+        <br />
         <button>A random button to test accessibility</button>
 
         <toast-component></toast-component>
 
         <script type="module">
-            import { NotifyToast } from "/dist/feedback/toast.component.js";
+            import {
+                NotifyToast,
+                DismissToast,
+            } from "/dist/feedback/toast.component.js";
 
             document.getElementById("openbtn").onclick = function () {
                 NotifyToast({
@@ -89,6 +94,7 @@
 
             document.getElementById("openbtnPersist").onclick = function () {
                 NotifyToast({
+                    id: "persistent",
                     text: "This is a persistent Toast!",
                     persist: true,
                 });
@@ -97,6 +103,7 @@
             document.getElementById("openbtnPersistDanger").onclick =
                 function () {
                     NotifyToast({
+                        id: "persistent",
                         text: "This is a persistent Toast!",
                         persist: true,
                         danger: true,
@@ -113,6 +120,10 @@
                     },
                 });
             };
+            document.getElementById("closePersistentToast").onclick =
+                function () {
+                    DismissToast("persistent");
+                };
         </script>
     </body>
 </html>
