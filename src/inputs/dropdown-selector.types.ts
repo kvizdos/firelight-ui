@@ -1,3 +1,3 @@
-interface DropdownItem {
+export interface DropdownItem {
   key: string;
 }

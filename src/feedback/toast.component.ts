@@ -1,9 +1,11 @@
 import { LitElement, html, css } from "lit";
-import { state, customElement } from "lit/decorators.js";
+import { customElement } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { repeat } from "lit/directives/repeat.js";
+import { toastState } from "./toast.state";
+import { StateController } from "@lit-app/state";
 
-interface Toast {
+export interface Toast {
   id: number;
   text: string;
   danger: boolean;
@@ -14,11 +16,9 @@ interface Toast {
   onClick?: () => void;
 }
 
-let globalId = 0;
-
 @customElement("toast-component")
 export class ToastComponent extends LitElement {
-  @state() toasts: Toast[] = [];
+  private _ = new StateController(this, toastState);
 
   static styles = [
     css`
@@ -155,53 +155,15 @@ export class ToastComponent extends LitElement {
     super();
 
     window.addEventListener("do-toast", (e: Event) => {
-      const {
-        text,
-        danger,
-        persist,
-        actionText,
-        onClick,
-        duration: customDuration,
-      } = (e as CustomEvent).detail;
-
-      const duration =
-        customDuration !== undefined ? customDuration : danger ? 8000 : 2500;
-      const id = globalId++;
-
-      const toast: Toast = {
-        id,
-        text,
-        danger,
-        duration,
-        persist,
-        actionText,
-        onClick,
-      };
-
-      this.toasts = [...this.toasts, toast];
-
-      if (!persist) {
-        setTimeout(() => this.removeToastById(id), duration);
-      }
+      const toast = (e as CustomEvent<Toast>).detail;
+      toastState.pushToast(toast);
     });
-  }
-
-  private removeToastById(id: number) {
-    const toast = this.toasts.find((t) => t.id === id);
-    if (!toast) return;
-
-    toast.removing = true;
-    this.toasts = [...this.toasts];
-
-    setTimeout(() => {
-      this.toasts = this.toasts.filter((t) => t.id !== id);
-    }, 200);
   }
 
   render() {
     return html`<div id="root">
       ${repeat(
-        this.toasts,
+        toastState.toasts,
         (t) => t.id,
         (toast) => html`
           <div
@@ -218,7 +180,7 @@ export class ToastComponent extends LitElement {
                   class="action-btn"
                   @click=${() => {
                     toast.onClick?.();
-                    this.removeToastById(toast.id);
+                    toastState.removeToastById(toast.id);
                   }}
                 >
                   ${toast.actionText}
@@ -227,7 +189,7 @@ export class ToastComponent extends LitElement {
             ${toast.persist && toast.onClick === undefined
               ? html`<button
                   class="close-btn"
-                  @click=${() => this.removeToastById(toast.id)}
+                  @click=${() => toastState.removeToastById(toast.id)}
                 >
                   &times;
                 </button>`

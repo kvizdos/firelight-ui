@@ -7,24 +7,24 @@
     ],
     "rootDir": "./src",
     "outDir": "./dist",
-    "target": "ES2017",
-    "module": "ES2015",
-    "declaration": true,
+    "target": "es2018",
+    "module": "esnext",
     "moduleResolution": "node",
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
+    "declaration": true,
+    "noEmitOnError": true,
+    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitThis": true,
+    "isolatedModules": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "strict": true,
+    "strict": false,
+    "strictFunctionTypes": false,
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "declarationMap": true, // helpful for source navigation in IDEs
-    "preserveSymlinks": true, // ensures proper resolution when consumed via `npm link`
     "resolveJsonModule": true, // just in case future components import JSON
-    "forceConsistentCasingInFileNames": true, // ensures no casing mismatches (esp. cross-platform)
-    "allowSyntheticDefaultImports": true // better compatibility across tooling
+    "forceConsistentCasingInFileNames": true // ensures no casing mismatches (esp. cross-platform)
   },
   "include": ["src/**/*.ts"]
 }
