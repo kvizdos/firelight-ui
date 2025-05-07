@@ -1,0 +1,70 @@
+<svg
+      viewBox="0 0 100 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M41.0345 46L16.5445 70.4516C14.5879 72.405 14.5882 75.5756 16.5451 77.5288L22.5018 83.4741C24.4539 85.4224 27.6149 85.4222 29.5666 83.4735L46 67.0667"
+        class="primary-stroke"
+        stroke-width="8"
+      />
+      <path
+        d="M58.1954 54L83.2984 29.6065C85.3234 27.6387 85.3184 24.3855 83.2873 22.424L77.0116 16.3634C75.0702 14.4886 71.9913 14.4928 70.0551 16.3729L53 32.9333"
+        class="primary-stroke"
+        stroke-width="8"
+      />
+      <rect
+        x="65"
+        y="74.9967"
+        width="8"
+        height="18"
+        rx="4"
+        transform="rotate(-45 65 74.9967)"
+        class="shadow"
+      />
+      <rect
+        x="73.4984"
+        y="63.4888"
+        width="8"
+        height="18"
+        rx="4"
+        transform="rotate(-75 73.4984 63.4888)"
+        class="shadow"
+      />
+      <rect
+        x="49.6805"
+        y="79.3572"
+        width="8"
+        height="18"
+        rx="4"
+        transform="rotate(-15 49.6805 79.3572)"
+        class="shadow"
+      />
+      <rect
+        x="34.4454"
+        y="21.5427"
+        width="8"
+        height="18"
+        rx="4"
+        transform="rotate(135 34.4454 21.5427)"
+        class="shadow"
+      />
+      <rect
+        x="24.947"
+        y="33.0505"
+        width="8"
+        height="18"
+        rx="4"
+        transform="rotate(105 24.947 33.0505)"
+        class="shadow"
+      />
+      <rect
+        x="49.765"
+        y="18.1822"
+        width="8"
+        height="18"
+        rx="4"
+        transform="rotate(165 49.765 18.1822)"
+        class="shadow"
+      />
+    </svg>

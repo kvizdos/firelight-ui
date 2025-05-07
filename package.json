@@ -106,6 +106,10 @@
     "./styles/inputs.style": {
       "import": "./dist/styles/inputs.style.js",
       "types": "./dist/styles/inputs.style.d.ts"
+    },
+    "./icons/ui-icon.component": {
+      "import": "./dist/icons/ui-icon.component.js",
+      "types": "./dist/icons/ui-icon.component.d.ts"
     }
   },
   "files": [
@@ -131,6 +135,7 @@
     "@web/dev-server-rollup": "^0.6.4",
     "eslint": "^9.23.0",
     "lit-analyzer": "^2.0.3",
+    "svgo": "^3.3.2",
     "typescript": "^4.5.2"
   }
 }
