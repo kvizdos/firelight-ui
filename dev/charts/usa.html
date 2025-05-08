@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <script
+            type="module"
+            src="/dist/charts/usa-chart.component.js"
+        ></script>
+
+        <style>
+            .grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .grid > usa-chart {
+                border: 1px solid red;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="grid">
+            <usa-chart id="chart"></usa-chart>
+            <usa-chart id="chart"></usa-chart>
+        </div>
+    </body>
+</html>

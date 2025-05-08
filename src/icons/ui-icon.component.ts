@@ -1,7 +1,7 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { icons } from "./icons";
+import { IconName, icons } from "./icons";
 
 @customElement("ui-icon")
 export class IconComponent extends LitElement {
@@ -72,7 +72,7 @@ export class IconComponent extends LitElement {
     }
   `;
 
-  @property() name: string = "";
+  @property() name: IconName = "info";
   @property() size: string = "24px";
   @property({ type: Boolean }) hoverable = false;
   @property() colorway: string = "primary";

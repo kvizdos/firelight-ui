@@ -93,11 +93,9 @@ export class RadioSelectorComponent extends LitElement {
             }}
             @mouseenter=${() => {
               this.hoveringChoiceKey = choice.key;
-              console.log("mouse over");
             }}
             @mouseleave=${() => {
               this.hoveringChoiceKey = "";
-              console.log("mouse leave");
             }}
           >
             <div>

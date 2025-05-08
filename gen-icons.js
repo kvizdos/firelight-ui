@@ -44,5 +44,9 @@ for (const file of files) {
 
 const result = `import { html } from 'lit';\n\nexport const icons: Record<string, ReturnType<typeof html>> = {\n${iconMap.join("\n")}\n};\n`;
 
-fs.writeFileSync(outFile, result);
+const typeDef = `\n\nexport type IconName = ${files
+	.map((f) => `"${path.basename(f, ".svg")}"`)
+	.join(" | ")};\n`;
+
+fs.writeFileSync(outFile, result + typeDef);
 console.log(`✅ icons.ts generated with ${iconMap.length} icons.`);
