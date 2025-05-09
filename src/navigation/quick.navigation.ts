@@ -30,6 +30,7 @@ export class QuickNavComponent extends LitElement {
     }
 
     nav button {
+      color: #1a1a1a;
       background: unset;
       border: 0;
       padding: 0.5rem 1rem;
