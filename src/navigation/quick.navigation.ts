@@ -119,7 +119,10 @@ export class QuickNavComponent extends LitElement {
 
   firstUpdated() {
     const initialKey = location.hash?.replace("#", "") || this.defaultPageKey;
-    const initialPage = this.pages.find((p) => p.URLKey === initialKey);
+    let initialPage = this.pages.find((p) => p.URLKey === initialKey);
+    if (!initialPage) {
+      initialPage = this.pages.find((p) => p.URLKey === this.defaultPageKey);
+    }
     if (initialPage) {
       this.setSelected(initialPage, false).then(() => {
         this.updateComplete.then(() => {
@@ -131,6 +134,8 @@ export class QuickNavComponent extends LitElement {
           });
         });
       });
+    } else {
+      console.warn("Page key not found: ", this.defaultPageKey);
     }
   }
 
