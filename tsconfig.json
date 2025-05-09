@@ -15,7 +15,6 @@
     "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitThis": true,
-    "isolatedModules": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": false,

@@ -110,6 +110,14 @@
     "./icons/ui-icon.component": {
       "import": "./dist/icons/ui-icon.component.js",
       "types": "./dist/icons/ui-icon.component.d.ts"
+    },
+    "./navigation/navigation.types": {
+      "import": "./dist/navigation/navigation.types.js",
+      "types": "./dist/navigation/navigation.types.d.ts"
+    },
+    "./navigation/quick.navigation": {
+      "import": "./dist/navigation/quick.navigation.js",
+      "types": "./dist/navigation/quick.navigation.d.ts"
     }
   },
   "files": [
