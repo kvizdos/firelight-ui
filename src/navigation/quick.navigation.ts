@@ -66,6 +66,10 @@ export class QuickNavComponent extends LitElement {
     nav button.selected::after {
       width: 100%;
     }
+
+    section {
+      margin-top: 1rem;
+    }
   `;
 
   @property() pages: NavigationItem<any>[] = [
