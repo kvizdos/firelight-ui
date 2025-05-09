@@ -21,6 +21,8 @@ export class QuickNavComponent extends LitElement {
       -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
       scrollbar-width: none; /* Firefox */
+      padding: 2px; /* add horizontal padding */
+      scroll-padding: 0 0.5rem; /* ensure focused items aren't flush with edges */
     }
 
     nav::-webkit-scrollbar {
@@ -154,6 +156,14 @@ export class QuickNavComponent extends LitElement {
     const page = this.pages.find((p) => p.URLKey === key);
     if (page) {
       this.setSelected(page, false);
+      this.updateComplete.then(() => {
+        const selectedBtn = this.renderRoot.querySelector("button.selected");
+        selectedBtn?.scrollIntoView({
+          behavior: "smooth",
+          inline: "center",
+          block: "nearest",
+        });
+      });
     }
   }
 
