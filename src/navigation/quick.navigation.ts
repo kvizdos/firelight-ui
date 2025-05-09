@@ -78,76 +78,6 @@ export class QuickNavComponent extends LitElement {
       TemplateLiteral: html`<p>Hello, Security page</p>`,
     },
     {
-      URLKey: "security",
-      Name: "Security",
-      TemplateLiteral: html`<p>Hello, Security page</p>`,
-    },
-    {
-      URLKey: "security",
-      Name: "Security",
-      TemplateLiteral: html`<p>Hello, Security page</p>`,
-    },
-    {
-      URLKey: "security",
-      Name: "Security",
-      TemplateLiteral: html`<p>Hello, Security page</p>`,
-    },
-    {
-      URLKey: "security",
-      Name: "Security",
-      TemplateLiteral: html`<p>Hello, Security page</p>`,
-    },
-    {
-      URLKey: "security",
-      Name: "Security",
-      TemplateLiteral: html`<p>Hello, Security page</p>`,
-    },
-    {
-      URLKey: "security",
-      Name: "Security",
-      TemplateLiteral: html`<p>Hello, Security page</p>`,
-    },
-    {
-      URLKey: "security",
-      Name: "Security",
-      TemplateLiteral: html`<p>Hello, Security page</p>`,
-    },
-    {
-      URLKey: "security",
-      Name: "Security",
-      TemplateLiteral: html`<p>Hello, Security page</p>`,
-    },
-    {
-      URLKey: "security",
-      Name: "Security",
-      TemplateLiteral: html`<p>Hello, Security page</p>`,
-    },
-    {
-      URLKey: "security",
-      Name: "Security",
-      TemplateLiteral: html`<p>Hello, Security page</p>`,
-    },
-    {
-      URLKey: "security",
-      Name: "Security",
-      TemplateLiteral: html`<p>Hello, Security page</p>`,
-    },
-    {
-      URLKey: "security",
-      Name: "Security",
-      TemplateLiteral: html`<p>Hello, Security page</p>`,
-    },
-    {
-      URLKey: "security",
-      Name: "Security",
-      TemplateLiteral: html`<p>Hello, Security page</p>`,
-    },
-    {
-      URLKey: "security",
-      Name: "Security",
-      TemplateLiteral: html`<p>Hello, Security page</p>`,
-    },
-    {
       URLKey: "demo",
       Name: "Demo",
       TemplateLiteral: html`<p>Hello, Demo page</p>`,
@@ -163,8 +93,11 @@ export class QuickNavComponent extends LitElement {
     | TemplateResult
     | undefined = undefined;
 
-  private async setSelected(page: NavigationItem<any>) {
+  private async setSelected(page: NavigationItem<any>, push = true) {
     this.selected = page.URLKey;
+    if (push) {
+      history.pushState({ key: page.URLKey }, "", `#${page.URLKey}`);
+    }
     if (page.PageComponent !== undefined) {
       const pageComponent = new page.PageComponent() as PageComponentInterface;
 
@@ -184,20 +117,39 @@ export class QuickNavComponent extends LitElement {
       page.TemplateLiteral ?? html`<p>Page is missing it's definition.</p.>`;
   }
 
-  connectedCallback(): void {
-    super.connectedCallback();
-    this.setSelected(
-      this.pages.filter((p) => p.URLKey === this.defaultPageKey)[0],
-    );
+  firstUpdated() {
+    const initialKey = location.hash?.replace("#", "") || this.defaultPageKey;
+    const initialPage = this.pages.find((p) => p.URLKey === initialKey);
+    if (initialPage) {
+      this.setSelected(initialPage, false).then(() => {
+        this.updateComplete.then(() => {
+          const selectedBtn = this.renderRoot.querySelector("button.selected");
+          selectedBtn?.scrollIntoView({
+            behavior: "smooth",
+            inline: "center",
+            block: "nearest",
+          });
+        });
+      });
+    }
   }
 
-  updated() {
-    const selectedBtn = this.renderRoot.querySelector("button.selected");
-    selectedBtn?.scrollIntoView({
-      behavior: "smooth",
-      inline: "center",
-      block: "nearest",
-    });
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener("popstate", this.listenForNavChanges.bind(this));
+  }
+
+  disconnectedCallback() {
+    super.connectedCallback();
+    window.removeEventListener("popstate", this.listenForNavChanges.bind(this));
+  }
+
+  listenForNavChanges() {
+    const key = location.hash.replace("#", "") || this.defaultPageKey;
+    const page = this.pages.find((p) => p.URLKey === key);
+    if (page) {
+      this.setSelected(page, false);
+    }
   }
 
   render() {
