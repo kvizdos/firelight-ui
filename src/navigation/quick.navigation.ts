@@ -103,7 +103,11 @@ export class QuickNavComponent extends LitElement {
   private async setSelected(page: NavigationItem<any>, push = true) {
     this.selected = page.URLKey;
     if (push) {
-      history.pushState({ key: page.URLKey }, "", `#${page.URLKey}`);
+      history.pushState(
+        { key: page.URLKey },
+        "",
+        `${window.location.pathname}#${page.URLKey}`,
+      );
     }
     if (page.PageComponent !== undefined) {
       const pageComponent = new page.PageComponent() as PageComponentInterface;
