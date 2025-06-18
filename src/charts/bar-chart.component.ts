@@ -100,9 +100,10 @@ export class BarChartComponent extends LitElement {
       .day {
         transition: 400ms;
         width: 100%;
-        overflow: hidden;
         display: flex;
         flex-direction: column;
+        container-type: inline-size;
+        container-name: day;
       }
       tweener-component {
         transition: 200ms;
@@ -175,6 +176,35 @@ export class BarChartComponent extends LitElement {
       #legend .key p span {
         color: var(--gray-600);
         font-weight: 400;
+      }
+
+      .day #label {
+        font-size: 0.85rem;
+        line-height: 1.2;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-top: 0.25rem;
+        container-type: inline-size;
+        container-name: day-label;
+      }
+
+      .day #label.nodata {
+        color: transparent;
+      }
+
+      @container day (inline-size < 4rem) {
+        .day #label {
+          overflow: visible;
+          transition: 200ms;
+          opacity: 0;
+        }
+        .day:hover #label {
+          transition: 200ms;
+          opacity: 1;
+        }
+        .day #label {
+        }
       }
 
       @container (inline-size < 500px) {
@@ -377,6 +407,7 @@ export class BarChartComponent extends LitElement {
                       ></div>
                     `
                   : html` <div class="unit nodata" style="flex-grow: 1"></div>`}
+                <p id="label" class="nodata">No Data</p>
               </div>`,
           )}
         ${this.chart.Points.map(
@@ -421,6 +452,8 @@ export class BarChartComponent extends LitElement {
                       })}"
                     ></div>`,
               )}
+
+              <p id="label">${this.chart.XAxis[index]}</p>
             </div>
           `,
         )}
