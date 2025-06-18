@@ -179,32 +179,32 @@ export class BarChartComponent extends LitElement {
       }
 
       .day #label {
-        font-size: 0.85rem;
+        font-size: 1rem;
         line-height: 1.2;
         white-space: nowrap;
-        overflow: hidden;
+        overflow: visible;
         text-overflow: ellipsis;
-        margin-top: 0.25rem;
-        container-type: inline-size;
-        container-name: day-label;
+        margin-top: 0.35rem;
+        transition: 200ms;
+        text-align: center;
       }
 
-      .day #label.nodata {
-        color: transparent;
+      .day.last #label {
+        text-align: right;
       }
 
-      @container day (inline-size < 4rem) {
-        .day #label {
-          overflow: visible;
-          transition: 200ms;
-          opacity: 0;
-        }
-        .day:hover #label {
-          transition: 200ms;
-          opacity: 1;
-        }
-        .day #label {
-        }
+      .day.first #label {
+        text-align: left;
+      }
+
+      .day:not(.first):not(.last) #label,
+      #array:has(.day:not(.nodata):hover) .day:not(.nodata):not(:hover) #label {
+        opacity: 0;
+      }
+
+      .day:hover #label {
+        transition: 200ms;
+        opacity: 1 !important;
       }
 
       @container (inline-size < 500px) {
@@ -350,8 +350,6 @@ export class BarChartComponent extends LitElement {
             `,
           )}
         </div>
-
-        <p id="xAxis">${this.hoveringKey}</p>
       </div>
       <div
         id="array"
@@ -373,7 +371,7 @@ export class BarChartComponent extends LitElement {
           .map(
             (_, index) =>
               html` <div
-                class="day ${index <
+                class="day nodata ${index <
                 this.chart.WideContainerColumns -
                   this.chart.SmallContainerColumns
                   ? "mobileHide"
@@ -410,53 +408,68 @@ export class BarChartComponent extends LitElement {
                 <p id="label" class="nodata">No Data</p>
               </div>`,
           )}
-        ${this.chart.Points.map(
-          (pointsForDay, index) => html`
+        ${this.chart.Points.map((pointsForDay, index) => {
+          const isNoData = pointsForDay.every((p) => p === 0);
+          const label = this.chart.XAxis[index];
+          const flexVal =
+            this.minPoint * ((index + 1) / this.chart.Points.length);
+          return html`
             <div
-              class="day"
-              @focus=${() => {
-                this.hoverDate(index);
-              }}
-              @mouseover=${() => {
-                this.hoverDate(index);
-              }}
+              class="day ${isNoData ? "nodata" : ""} ${index === 0
+                ? "first"
+                : index === this.chart.Points.length - 1
+                  ? "last"
+                  : ""}"
+              @focus=${() => this.hoverDate(index)}
+              @mouseover=${() => this.hoverDate(index)}
             >
-              ${this.chart.Style === "normal"
+              ${isNoData
                 ? html`
                     <div
-                      data-max="${this.maxPoint}"
                       class="unit empty"
-                      data-pfd="${pointsForDay[this.viewingLegendKey] ||
-                      "unset"}"
                       style="flex: ${this.maxPoint -
-                      (this.viewingLegendKey === -1
-                        ? pointsForDay.reduce((i, h) => i + h)
-                        : pointsForDay[this.viewingLegendKey])} 1 0"
+                      Math.min(this.maxPoint, 5)} 1 0"
+                    ></div>
+                    <div
+                      class="unit nodata"
+                      style="flex: ${Math.min(this.maxPoint, 5)} 1 0"
                     ></div>
                   `
-                : ""}
-              ${pointsForDay.map((point, pointIndex) =>
-                point === 0
-                  ? undefined
-                  : html`<div
-                      class="unit"
-                      style="${styleMap({
-                        flex: `${
-                          this.viewingLegendKey === -1
-                            ? point
-                            : this.viewingLegendKey !== pointIndex
-                              ? 0
-                              : point
-                        } 1 0`,
-                        "--color": this.chart.Axes[pointIndex].Color.toString(),
-                      })}"
-                    ></div>`,
-              )}
-
-              <p id="label">${this.chart.XAxis[index]}</p>
+                : html`
+                    ${this.chart.Style === "normal"
+                      ? html`
+                          <div
+                            class="unit empty"
+                            style="flex: ${this.maxPoint -
+                            (this.viewingLegendKey === -1
+                              ? pointsForDay.reduce((i, h) => i + h)
+                              : pointsForDay[this.viewingLegendKey])} 1 0"
+                          ></div>
+                        `
+                      : ""}
+                    ${pointsForDay.map((point, pointIndex) =>
+                      point === 0
+                        ? undefined
+                        : html`<div
+                            class="unit"
+                            style="${styleMap({
+                              flex: `${
+                                this.viewingLegendKey === -1
+                                  ? point
+                                  : this.viewingLegendKey !== pointIndex
+                                    ? 0
+                                    : point
+                              } 1 0`,
+                              "--color":
+                                this.chart.Axes[pointIndex].Color.toString(),
+                            })}"
+                          ></div>`,
+                    )}
+                  `}
+              <p id="label">${label}</p>
             </div>
-          `,
-        )}
+          `;
+        })}
       </div>
 
       <div id="axis"></div>
