@@ -425,15 +425,8 @@ export class BarChartComponent extends LitElement {
             >
               ${isNoData
                 ? html`
-                    <div
-                      class="unit empty"
-                      style="flex: ${this.maxPoint -
-                      Math.min(this.maxPoint, 5)} 1 0"
-                    ></div>
-                    <div
-                      class="unit nodata"
-                      style="flex: ${Math.min(this.maxPoint, 5)} 1 0"
-                    ></div>
+                    <div class="unit empty" style="flex: 1 1 0"></div>
+                    <div class="unit nodata" style="height: 10px;"></div>
                   `
                 : html`
                     ${this.chart.Style === "normal"
