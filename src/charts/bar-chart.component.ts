@@ -23,11 +23,13 @@ const DEFAULT_CHART: BarChart = {
     { Label: "", Color: "transparent" },
     { Label: "", Color: "transparent" },
   ],
+  OnClick: (label, unit) => console.log(label, unit),
   XAxis: [],
   Points: [],
 };
 
 export interface BarChart {
+  OnClick?: (label: string, unit: string) => void;
   Style: "100-percent" | "normal";
   WideContainerColumns: number;
   SmallContainerColumns: number;
@@ -124,6 +126,9 @@ export class BarChartComponent extends LitElement {
         transition: 60ms;
       }
 
+      button {
+        border: 0;
+      }
       #legend {
         display: flex;
         justify-content: space-between;
@@ -311,6 +316,12 @@ export class BarChartComponent extends LitElement {
     }
   }
 
+  private handleUnitClick(label: string, unit: string) {
+    if (this.chart.OnClick) {
+      this.chart.OnClick(label, unit);
+    }
+  }
+
   render() {
     return html`<div class="widget" id="root">
       <div id="legend">
@@ -443,7 +454,14 @@ export class BarChartComponent extends LitElement {
                     ${pointsForDay.map((point, pointIndex) =>
                       point === 0
                         ? undefined
-                        : html`<div
+                        : html`<button
+                            @click=${() =>
+                              this.handleUnitClick(
+                                label,
+                                this.chart.Axes[pointIndex].Label,
+                              )}
+                            aria-label="${label} - ${this.chart.Axes[pointIndex]
+                              .Label} - ${point}"
                             class="unit"
                             style="${styleMap({
                               flex: `${
@@ -456,7 +474,7 @@ export class BarChartComponent extends LitElement {
                               "--color":
                                 this.chart.Axes[pointIndex].Color.toString(),
                             })}"
-                          ></div>`,
+                          ></button>`,
                     )}
                   `}
               <p id="label">${label}</p>
