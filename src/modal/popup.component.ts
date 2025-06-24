@@ -104,7 +104,7 @@ export class PopupMenu extends LitElement {
   }
 
   private _onOutsideClick = (e: MouseEvent) => {
-    if (!this.contains(e.target as Node)) {
+    if (!e.composedPath().includes(this)) {
       this.close();
     }
   };
