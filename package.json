@@ -15,6 +15,18 @@
       "import": "./dist/charts/bar-chart.component.js",
       "types": "./dist/charts/bar-chart.component.d.ts"
     },
+    "./charts/usa-chart.component": {
+      "import": "./dist/charts/usa-chart.component.js",
+      "types": "./dist/charts/usa-chart.component.d.ts"
+    },
+    "./controllers/debounce.controller": {
+      "import": "./dist/controllers/debounce.controller.js",
+      "types": "./dist/controllers/debounce.controller.d.ts"
+    },
+    "./datatypes/trie": {
+      "import": "./dist/datatypes/trie.js",
+      "types": "./dist/datatypes/trie.d.ts"
+    },
     "./directives/pattern-regex.directive": {
       "import": "./dist/directives/pattern-regex.directive.js",
       "types": "./dist/directives/pattern-regex.directive.d.ts"
@@ -46,6 +58,14 @@
     "./feedback/toast.component": {
       "import": "./dist/feedback/toast.component.js",
       "types": "./dist/feedback/toast.component.d.ts"
+    },
+    "./icons/icons": {
+      "import": "./dist/icons/icons.js",
+      "types": "./dist/icons/icons.d.ts"
+    },
+    "./icons/ui-icon.component": {
+      "import": "./dist/icons/ui-icon.component.js",
+      "types": "./dist/icons/ui-icon.component.d.ts"
     },
     "./inputs/checkbox.component": {
       "import": "./dist/inputs/checkbox.component.js",
@@ -79,21 +99,25 @@
       "import": "./dist/inputs/timezone-picker.component.js",
       "types": "./dist/inputs/timezone-picker.component.d.ts"
     },
-    "./layouts/confetti.layout": {
-      "import": "./dist/layouts/confetti.layout.js",
-      "types": "./dist/layouts/confetti.layout.d.ts"
-    },
-    "./layouts/dashboard.layout": {
-      "import": "./dist/layouts/dashboard.layout.js",
-      "types": "./dist/layouts/dashboard.layout.d.ts"
-    },
-    "./layouts/subnav.layout": {
-      "import": "./dist/layouts/subnav.layout.js",
-      "types": "./dist/layouts/subnav.layout.d.ts"
-    },
     "./modal/modal.component": {
       "import": "./dist/modal/modal.component.js",
       "types": "./dist/modal/modal.component.d.ts"
+    },
+    "./modal/popup.component": {
+      "import": "./dist/modal/popup.component.js",
+      "types": "./dist/modal/popup.component.d.ts"
+    },
+    "./native-ios/ios-sheet.component": {
+      "import": "./dist/native-ios/ios-sheet.component.js",
+      "types": "./dist/native-ios/ios-sheet.component.d.ts"
+    },
+    "./navigation/navigation.types": {
+      "import": "./dist/navigation/navigation.types.js",
+      "types": "./dist/navigation/navigation.types.d.ts"
+    },
+    "./navigation/quick.navigation": {
+      "import": "./dist/navigation/quick.navigation.js",
+      "types": "./dist/navigation/quick.navigation.d.ts"
     },
     "./progress/stepper.component": {
       "import": "./dist/progress/stepper.component.js",
@@ -103,21 +127,13 @@
       "import": "./dist/regex/email.pattern.js",
       "types": "./dist/regex/email.pattern.d.ts"
     },
+    "./search/search.component": {
+      "import": "./dist/search/search.component.js",
+      "types": "./dist/search/search.component.d.ts"
+    },
     "./styles/inputs.style": {
       "import": "./dist/styles/inputs.style.js",
       "types": "./dist/styles/inputs.style.d.ts"
-    },
-    "./icons/ui-icon.component": {
-      "import": "./dist/icons/ui-icon.component.js",
-      "types": "./dist/icons/ui-icon.component.d.ts"
-    },
-    "./navigation/navigation.types": {
-      "import": "./dist/navigation/navigation.types.js",
-      "types": "./dist/navigation/navigation.types.d.ts"
-    },
-    "./navigation/quick.navigation": {
-      "import": "./dist/navigation/quick.navigation.js",
-      "types": "./dist/navigation/quick.navigation.d.ts"
     }
   },
   "files": [

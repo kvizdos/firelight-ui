@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script type="module" src="/dist/modal/popup.component.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            * {
+                font-family: "Inter", sans-serif;
+            }
+
+            body {
+                padding: 3rem;
+            }
+
+            button {
+                padding: 0.5rem 1rem;
+                background: #1448e1;
+                color: white;
+                border: none;
+                border-radius: 0.4rem;
+                cursor: pointer;
+            }
+
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100dvh;
+            }
+        </style>
+    </head>
+    <body>
+        <popup-menu
+            id="popup"
+            location-vertical="bottom"
+            location-horizontal="right"
+        >
+            <button slot="trigger" id="trigger">Open Menu</button>
+            <div>
+                <h3 style="margin-top: 0">Hello World</h3>
+                <p>This is the popup content.</p>
+                <button onclick="alert('Clicked!')">Click me</button>
+            </div>
+        </popup-menu>
+
+        <popup-menu
+            id="popup"
+            location-vertical="bottom"
+            location-horizontal="left"
+        >
+            <button slot="trigger" id="trigger">Open Menu</button>
+            <div>
+                <h3 style="margin-top: 0">Hello World</h3>
+                <p>This is the popup content.</p>
+                <button onclick="alert('Clicked!')">Click me</button>
+            </div>
+        </popup-menu>
+
+        <popup-menu
+            id="popup"
+            location-vertical="top"
+            location-horizontal="right"
+        >
+            <button slot="trigger" id="trigger">Open Menu</button>
+            <div>
+                <h3 style="margin-top: 0">Hello World</h3>
+                <p>This is the popup content.</p>
+                <button onclick="alert('Clicked!')">Click me</button>
+            </div>
+        </popup-menu>
+
+        <popup-menu
+            id="popup"
+            location-vertical="top"
+            location-horizontal="left"
+        >
+            <button slot="trigger" id="trigger">Open Menu</button>
+            <div>
+                <h3 style="margin-top: 0">Hello World</h3>
+                <p>This is the popup content.</p>
+                <button onclick="alert('Clicked!')">Click me</button>
+            </div>
+        </popup-menu>
+    </body>
+</html>
