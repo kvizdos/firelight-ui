@@ -110,11 +110,24 @@ export class PopupMenu extends LitElement {
     }
   }
 
+  private attachTriggerClick(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    const nodes = slot.assignedElements({ flatten: true });
+
+    if (nodes.length) {
+      const el = nodes[0];
+      el.removeEventListener("click", this.toggleOpen); // avoid duplicates
+      el.addEventListener("click", this.toggleOpen);
+    }
+  }
+
+  private toggleOpen = () => {
+    this.open = !this.open;
+  };
+
   render() {
     return html`
-      <span @click=${() => (this.open = !this.open)}>
-        <slot name="trigger"></slot>
-      </span>
+      <slot name="trigger" @slotchange=${this.attachTriggerClick}></slot>
       <div id="dropdown" class=${classMap({ closed: !this.open })}>
         <slot></slot>
       </div>
