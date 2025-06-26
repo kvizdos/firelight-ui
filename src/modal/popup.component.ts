@@ -44,6 +44,10 @@ export class PopupMenu extends LitElement {
       pointer-events: none;
     }
 
+    #contentarea {
+      width: 100%;
+    }
+
     :host([location-horizontal="left"]) #dropdown {
       left: 0;
       right: auto;
@@ -74,6 +78,8 @@ export class PopupMenu extends LitElement {
   `;
 
   @property({ type: Boolean }) open = false;
+
+  @property({ type: Boolean }) hasContentArea = false;
 
   @property({ reflect: true, attribute: "location-vertical" })
   vertical: "top" | "bottom" = "top";
@@ -119,6 +125,12 @@ export class PopupMenu extends LitElement {
     return html`
       <div id="trigger" @click=${this.toggle}>
         <slot name="trigger"></slot>
+      </div>
+      <div
+        id="contentarea"
+        style="display: ${this.hasContentArea ? "inherit" : "none"}"
+      >
+        <slot name="contentarea"></slot>
       </div>
       <div id="dropdown" class=${classMap({ closed: !this.open })}>
         <slot></slot>
