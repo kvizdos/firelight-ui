@@ -275,7 +275,7 @@ export class BarChartComponent extends LitElement {
 
   hoverDate(hoverIndex: number | undefined) {
     if (hoverIndex === undefined) {
-      this.hoveringPoint = this.chart.Points[this.chart.Points.length - 1];
+      this.hoveringPoint = undefined;
       this.hoveringKey = this.chart.XAxis[this.chart.XAxis.length - 1];
       return;
     }
